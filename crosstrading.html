@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="overlay">
+<h1>Cross Trading</h1>
+
+<div class="form-box">
+
+<p>1. what are you trading?</p>
+<select id="type">
+  <option>adm</option>
+  <option>mm2</option>
+  <option>rbx</option>
+</select>
+
+<input id="items" placeholder="Items you are trading">
+
+<p>2. what are you looking for?</p>
+<select id="for">
+  <option>adm</option>
+  <option>mm2</option>
+  <option>rbx</option>
+</select>
+
+<input id="user" placeholder="Roblox Username">
+
+<button class="btn" onclick="sendTrade()">Send Order</button>
+
+</div>
+
+<script>
+function sendTrade() {
+  const webhook = "https://discord.com/api/webhooks/1501383292845297705/OErl1oLfXQhrZaBs-qqMwqhAlO_5Tehd6zpFasOwqFNhR9BSKNCJwNYN_nRRfVFlDq3_";
+
+  const data = {
+    content: `CROSS TRADE:
+Trading: ${type.value}
+Items: ${items.value}
+Looking For: ${for.value}
+User: ${user.value}`
+  };
+
+  fetch(webhook, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  });
+
+  alert("Sent!");
+}
+</script>
+
+</div>
+</body>
+</html>

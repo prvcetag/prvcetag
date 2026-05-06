@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  font-family: 'DynaPuff', cursive;
+  color: white;
+  text-align: center;
+  background-image: url('https://i.pinimg.com/736x/b8/2f/12/b82f128d3da960a83f296fa291af4cb3.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.overlay {
+  background: rgba(0, 0, 50, 0.6);
+  min-height: 100vh;
+  padding: 40px;
+}
+
+h1 {
+  font-size: 60px;
+  letter-spacing: 2px;
+}
+
+.menu {
+  margin-top: 100px;
+}
+
+.btn {
+  display: block;
+  margin: 20px auto;
+  padding: 20px;
+  width: 320px;
+  font-size: 32px;
+  font-family: 'DynaPuff', cursive;
+  background: rgba(0, 150, 255, 0.8);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: rgba(0, 200, 255, 1);
+}
+
+.form-box {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 15px;
+  width: 400px;
+  margin: auto;
+}
+
+input, textarea, select {
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'DynaPuff', cursive;
+}

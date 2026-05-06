@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="overlay">
+  <h1>Checkout</h1>
+
+  <div class="form-box">
+    <input id="user" placeholder="Roblox Username">
+    <input id="pose" placeholder="Pose">
+    <input id="color" placeholder="Preferred Colour">
+    <textarea id="details" placeholder="Extra Details"></textarea>
+
+    <button class="btn" onclick="sendOrder()">Send Order</button>
+  </div>
+</div>
+
+<script>
+function sendOrder() {
+  const webhook = "YOUR_WEBHOOK_URL";
+
+  const data = {
+    content: `NEW ORDER:
+Username: ${user.value}
+Pose: ${pose.value}
+Colour: ${color.value}
+Details: ${details.value}`
+  };
+
+  fetch(webhook, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  });
+
+  alert("Order sent!");
+}
+</script>
+
+</body>
+</html>
