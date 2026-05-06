@@ -1,60 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Cross Trading</title>
+
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="overlay">
+
 <h1>Cross Trading</h1>
 
 <div class="form-box">
 
 <p>1. what are you trading?</p>
-<select id="type">
-  <option>adm</option>
-  <option>mm2</option>
-  <option>rbx</option>
+<select id="tradeType">
+  <option value="adm">adm</option>
+  <option value="rbx">rbx</option>
+  <option value="mm2">mm2</option>
 </select>
 
-<input id="items" placeholder="Items you are trading">
+<input id="items" placeholder="what item(s) are you trading?">
 
 <p>2. what are you looking for?</p>
-<select id="for">
-  <option>adm</option>
-  <option>mm2</option>
-  <option>rbx</option>
+<select id="lookingFor">
+  <option value="adm">adm</option>
+  <option value="rbx">rbx</option>
+  <option value="mm2">mm2</option>
 </select>
 
-<input id="user" placeholder="Roblox Username">
+<input id="username" placeholder="Roblox username">
 
 <button class="btn" onclick="sendTrade()">Send Order</button>
 
 </div>
 
+</div>
+
 <script>
-function sendTrade() {
+async function sendTrade() {
+
   const webhook = "https://discord.com/api/webhooks/1501383292845297705/OErl1oLfXQhrZaBs-qqMwqhAlO_5Tehd6zpFasOwqFNhR9BSKNCJwNYN_nRRfVFlDq3_";
 
-  const data = {
-    content: `CROSS TRADE:
-Trading: ${type.value}
-Items: ${items.value}
-Looking For: ${for.value}
-User: ${user.value}`
+  const tradeType = document.getElementById("tradeType").value;
+  const items = document.getElementById("items").value;
+  const lookingFor = document.getElementById("lookingFor").value;
+  const username = document.getElementById("username").value;
+
+  const payload = {
+    content: `🔁 CROSS TRADE:
+-------------------
+Trading: ${tradeType}
+Items: ${items}
+Looking For: ${lookingFor}
+Username: ${username}`
   };
 
-  fetch(webhook, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
-  });
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-  alert("Sent!");
+    if (res.ok) {
+      alert("Sent!");
+    } else {
+      alert("Failed to send.");
+    }
+
+  } catch (err) {
+    alert("Error sending trade.");
+    console.error(err);
+  }
 }
 </script>
 
-</div>
 </body>
 </html>

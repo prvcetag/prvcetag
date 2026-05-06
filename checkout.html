@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Checkout</title>
+
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="overlay">
-  <h1>Checkout</h1>
 
-  <div class="form-box">
-    <input id="user" placeholder="Roblox Username">
-    <input id="pose" placeholder="Pose">
-    <input id="color" placeholder="Preferred Colour">
-    <textarea id="details" placeholder="Extra Details"></textarea>
+<h1>Checkout</h1>
 
-    <button class="btn" onclick="sendOrder()">Send Order</button>
-  </div>
+<div class="form-box">
+
+<input id="user" placeholder="Roblox Username">
+<input id="pose" placeholder="Pose">
+<input id="color" placeholder="Preferred Colour">
+<textarea id="details" placeholder="Extra Details"></textarea>
+
+<button class="btn" onclick="sendOrder()">Send Order</button>
+
+</div>
+
 </div>
 
 <script>
-function sendOrder() {
-  const webhook = "YOUR_WEBHOOK_URL";
+async function sendOrder() {
 
-  const data = {
-    content: `NEW ORDER:
-Username: ${user.value}
-Pose: ${pose.value}
-Colour: ${color.value}
-Details: ${details.value}`
+  const webhook = "https://discord.com/api/webhooks/1501383292845297705/OErl1oLfXQhrZaBs-qqMwqhAlO_5Tehd6zpFasOwqFNhR9BSKNCJwNYN_nRRfVFlDq3_";
+
+  const user = document.getElementById("user").value;
+  const pose = document.getElementById("pose").value;
+  const color = document.getElementById("color").value;
+  const details = document.getElementById("details").value;
+
+  const payload = {
+    content: `🛍️ NEW ORDER:
+-------------------
+Username: ${user}
+Pose: ${pose}
+Colour: ${color}
+Details: ${details}`
   };
 
-  fetch(webhook, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
-  });
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-  alert("Order sent!");
+    if (res.ok) {
+      alert("Order sent!");
+    } else {
+      alert("Failed to send order.");
+    }
+
+  } catch (err) {
+    alert("Error sending order.");
+    console.error(err);
+  }
 }
 </script>
 
