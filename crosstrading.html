@@ -1,81 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Cross Trading</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
 <div class="overlay">
 
-<h1>Cross Trading</h1>
+  <h1>🔁 Cross Trading</h1>
 
-<div class="form-box">
+  <select id="giveType">
+    <option disabled selected>What are you trading?</option>
+    <option>ADM</option>
+    <option>RBX</option>
+    <option>MM2</option>
+  </select>
 
-<p>1. what are you trading?</p>
-<select id="tradeType">
-  <option value="adm">adm</option>
-  <option value="rbx">rbx</option>
-  <option value="mm2">mm2</option>
-</select>
+  <input id="item" placeholder="What ITEM are you trading?">
 
-<input id="items" placeholder="what item(s) are you trading?">
+  <select id="wantType">
+    <option disabled selected>What are you looking for?</option>
+    <option>MM2</option>
+    <option>ADM</option>
+    <option>RBX</option>
+  </select>
 
-<p>2. what are you looking for?</p>
-<select id="lookingFor">
-  <option value="adm">adm</option>
-  <option value="rbx">rbx</option>
-  <option value="mm2">mm2</option>
-</select>
+  <input id="username" placeholder="Roblox Username">
 
-<input id="username" placeholder="Roblox username">
-
-<button class="btn" onclick="sendTrade()">Send Order</button>
-
-</div>
+  <button class="btn" onclick="sendTrade()">
+    Send Cross Trade
+  </button>
 
 </div>
 
-<script>
-async function sendTrade() {
-
-const webhook = "https://corsproxy.io/?https://discord.com/api/webhooks/1501392563251318784/Az0me-mj2rTm-IgBbsc1Vc-AUdT14KS1pMwpvubE4cwbRFYzP2ByADNJ3gsoOjfvhVsM";
-
-  const tradeType = document.getElementById("tradeType").value;
-  const items = document.getElementById("items").value;
-  const lookingFor = document.getElementById("lookingFor").value;
-  const username = document.getElementById("username").value;
-
-  const payload = {
-    content: `🔁 CROSS TRADE:
--------------------
-Trading: ${tradeType}
-Items: ${items}
-Looking For: ${lookingFor}
-Username: ${username}`
-  };
-
-  try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-      alert("Sent!");
-    } else {
-      alert("Failed to send.");
-    }
-
-  } catch (err) {
-    alert("Error sending trade.");
-    console.error(err);
-  }
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -1,91 +1,53 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
 <div class="overlay">
-  <h1>Checkout</h1>
 
-  <h2 id="orderType"></h2>
-  <h3 id="priceText"></h3>
+  <h1>🛍️ Checkout</h1>
 
-  <div class="form-box">
-    <input id="user" placeholder="Roblox Username">
-    <input id="pose" placeholder="Pose">
-    <input id="color" placeholder="Preferred Colour">
-    <textarea id="details" placeholder="Extra Details"></textarea>
+  <!-- shows selected item -->
+  <h2 id="orderTypeTitle"></h2>
 
-    <button class="btn" onclick="sendOrder()">Send Order</button>
-  </div>
+  <input id="user" placeholder="Roblox Username">
+  <input id="pose" placeholder="Pose you want">
+  <input id="color" placeholder="Preferred Colour">
+  <textarea id="details" placeholder="Extra details..."></textarea>
+
+  <button class="btn" onclick="sendOrderFromCheckout()">
+    Send Order
+  </button>
+
 </div>
 
+<script src="script.js"></script>
+
+<!-- displays selected type -->
 <script>
-function getType() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("type") || "order";
-}
+  const type = params.get("type");
 
-const type = getType();
-const orderTypeText = document.getElementById("orderType");
-const priceText = document.getElementById("priceText");
+  const title = document.getElementById("orderTypeTitle");
 
-let title = "ORDER";
-
-if (type === "gfx") {
-  title = "GFX ORDER";
-  priceText.innerText = "80 robux / 1 godly";
-}
-if (type === "banner") {
-  title = "BANNER ORDER";
-  priceText.innerText = "160 robux / 2 godlies";
-}
-if (type === "thumbnail") {
-  title = "THUMBNAIL ORDER";
-  priceText.innerText = "240 robux / 3 godlies";
-}
-
-orderTypeText.innerText = title;
-
-async function sendOrder() {
-
-  const webhook = "https://corsproxy.io/?https://discord.com/api/webhooks/1501392563251318784/Az0me-mj2rTm-IgBbsc1Vc-AUdT14KS1pMwpvubE4cwbRFYzP2ByADNJ3gsoOjfvhVsM";
-
-  const user = document.getElementById("user").value;
-  const pose = document.getElementById("pose").value;
-  const color = document.getElementById("color").value;
-  const details = document.getElementById("details").value;
-
-  const payload = {
-    content: `🛍️ NEW ${title}
--------------------
-Username: ${user}
-Pose: ${pose}
-Colour: ${color}
-Details: ${details}`
-  };
-
-  try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-      alert("Order sent!");
-    } else {
-      alert("Failed to send.");
-    }
-
-  } catch (err) {
-    alert("Error sending.");
-    console.error(err);
+  if (type === "gfx") {
+    title.innerText = "GFX ORDER - 80R$ / 1 godly";
   }
-}
+
+  if (type === "banner") {
+    title.innerText = "BANNER ORDER - 160R$ / 2 godlies";
+  }
+
+  if (type === "thumbnail") {
+    title.innerText = "THUMBNAIL ORDER - 240R$ / 3 godlies";
+  }
 </script>
 
 </body>

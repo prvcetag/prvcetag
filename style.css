@@ -3,163 +3,59 @@ body {
   font-family: 'DynaPuff', cursive;
   color: white;
   text-align: center;
-
-  background-image: url('https://i.pinimg.com/736x/b8/2f/12/b82f128d3da960a83f296fa291af4cb3.jpg');
+  background: url('https://i.pinimg.com/736x/b8/2f/12/b82f128d3da960a83f296fa291af4cb3.jpg');
   background-size: cover;
   background-attachment: fixed;
-  background-position: center;
 }
-
-/* =========================
-   OVERLAY (UNCHANGED)
-========================= */
 
 .overlay {
-  background: rgba(0, 0, 40, 0.65);
-  backdrop-filter: blur(6px);
   min-height: 100vh;
   padding: 40px;
-
-  position: relative;
-  z-index: 1;
+  background: rgba(0,0,40,0.65);
 }
 
-/* =========================
-   FIXED BUBBLES (ONLY CHANGE)
-========================= */
-
-.bubble {
-  position: fixed;
-  bottom: -80px;
-
-  border-radius: 50%;
-  pointer-events: none;
-
-  /* soft underwater look */
-  background: rgba(173, 216, 230, 0.35);
-  box-shadow: 0 0 8px rgba(0, 200, 255, 0.25);
-
-  animation: rise linear infinite;
-
-  z-index: 9999;
-}
-
-/* make existing HTML bubbles behave correctly */
-.bubble:nth-child(1) {
-  width: 12px;
-  height: 12px;
-  left: 10%;
-  animation-duration: 9s;
-}
-
-.bubble:nth-child(2) {
-  width: 18px;
-  height: 18px;
-  left: 30%;
-  animation-duration: 12s;
-}
-
-.bubble:nth-child(3) {
-  width: 14px;
-  height: 14px;
-  left: 50%;
-  animation-duration: 10s;
-}
-
-.bubble:nth-child(4) {
-  width: 22px;
-  height: 22px;
-  left: 70%;
-  animation-duration: 14s;
-}
-
-.bubble:nth-child(5) {
-  width: 16px;
-  height: 16px;
-  left: 90%;
-  animation-duration: 11s;
-}
-
-/* animation */
-@keyframes rise {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
-}
-
-/* =========================
-   EVERYTHING ELSE (UNCHANGED)
-========================= */
-
-h1 {
-  font-size: 60px;
-  letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(0, 200, 255, 0.9);
-}
-
-h2, h3 {
-  text-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
-}
-
+/* BUTTONS */
 .btn {
   display: block;
-  margin: 20px auto;
-  padding: 20px;
-  width: 320px;
-  font-size: 30px;
-
-  background: rgba(0, 150, 255, 0.75);
+  margin: 18px auto;
+  padding: 22px;
+  width: 360px;
+  font-size: 28px;
+  background: rgba(0,150,255,0.75);
   border: none;
   border-radius: 15px;
   color: white;
   cursor: pointer;
-
-  box-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
-  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0,200,255,0.7);
+  transition: 0.2s;
 }
 
 .btn:hover {
-  background: rgba(0, 200, 255, 1);
   transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(0, 255, 255, 1);
+  box-shadow: 0 0 30px rgba(0,200,255,1);
 }
 
-.form-box {
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 15px;
-  width: 400px;
-  margin: auto;
-
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
-}
-
+/* INPUTS */
 input, textarea, select {
-  width: 90%;
+  width: 300px;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
   border: none;
-
-  font-family: 'DynaPuff', cursive;
-  background: rgba(255,255,255,0.1);
-  color: white;
 }
 
-.price {
-  font-size: 18px;
-  opacity: 0.9;
-  text-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
+/* BUBBLES */
+.bubble {
+  position: fixed;
+  bottom: -60px;
+  border-radius: 50%;
+  background: rgba(173,216,230,0.35);
+  animation: rise 10s linear infinite;
+  z-index: 9999;
+}
+
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
 }
