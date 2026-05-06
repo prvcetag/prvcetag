@@ -1,53 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Checkout</title>
-
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="overlay">
+<h1 class="title">CHECKOUT</h1>
 
-  <h1>🛍️ Checkout</h1>
+<div class="form">
 
-  <!-- shows selected item -->
-  <h2 id="orderTypeTitle"></h2>
+<input id="user" placeholder="Roblox username">
+<input id="pose" placeholder="Pose wanted">
+<input id="color" placeholder="Preferred colour">
+<textarea id="details" placeholder="Extra details"></textarea>
 
-  <input id="user" placeholder="Roblox Username">
-  <input id="pose" placeholder="Pose you want">
-  <input id="color" placeholder="Preferred Colour">
-  <textarea id="details" placeholder="Extra details..."></textarea>
-
-  <button class="btn" onclick="sendOrderFromCheckout()">
-    Send Order
-  </button>
+<button class="btn" onclick="order()">Send Order</button>
 
 </div>
 
-<script src="script.js"></script>
-
-<!-- displays selected type -->
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const type = params.get("type");
+const webhook = "https://discord.com/api/webhooks/1501576085308182628/zuaR4p-qrjZc6shGRRintawI14RkMR6f1TbIRwtZPSXIMIviczfT5anEC_yvlT1W3SxY";
 
-  const title = document.getElementById("orderTypeTitle");
+function order() {
+    const type = new URLSearchParams(window.location.search).get("type");
 
-  if (type === "gfx") {
-    title.innerText = "GFX ORDER - 80R$ / 1 godly";
-  }
+    let title =
+        type === "gfx" ? "NEW GFX ORDER" :
+        type === "banner" ? "NEW BANNER ORDER" :
+        "NEW THUMBNAIL ORDER";
 
-  if (type === "banner") {
-    title.innerText = "BANNER ORDER - 160R$ / 2 godlies";
-  }
+    fetch(webhook, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            content: `${title}
+Username: ${user.value}
+Pose: ${pose.value}
+Color: ${color.value}
+Details: ${details.value}`
+        })
+    });
 
-  if (type === "thumbnail") {
-    title.innerText = "THUMBNAIL ORDER - 240R$ / 3 godlies";
-  }
+    alert("Sent!");
+}
 </script>
 
 </body>

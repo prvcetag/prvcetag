@@ -1,15 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
 <link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
 
-<div class="overlay">
+<body>
 
-<h1>🌊 prvcetag shop</h1>
+<div class="title">price's shop</div>
 
-<a href="shop.html"><button class="btn">Shop</button></a>
-<a href="gallery.html"><button class="btn">Gallery</button></a>
-<a href="support.html"><button class="btn">Support</button></a>
-<a href="contact.html"><button class="btn">Live Chat</button></a>
-<a href="crosstrading.html"><button class="btn">Cross Trading</button></a>
-
+<div class="nav-container">
+    <a class="btn" href="shop.html">SHOP</a>
+    <a class="btn" href="gallery.html">GALLERY</a>
+    <a class="btn" href="about.html">ABOUT</a>
+    <a class="btn" href="support.html">SUPPORT</a>
+    <a class="btn" href="crosstrade.html">CROSS TRADING</a>
+    <a class="btn" href="contact.html">CONTACT</a>
 </div>
 
-<script src="script.js"></script>
+<!-- CHAT -->
+<div class="chat-box">
+    <div class="chat-header" onclick="toggleChat()">💬 Live Chat</div>
+
+    <div class="chat-body">
+        <input id="chatUser" placeholder="Discord or Email">
+        <textarea id="chatMsg" placeholder="Message"></textarea>
+        <button onclick="sendChat()">Send</button>
+    </div>
+</div>
+
+</body>
+</html>
