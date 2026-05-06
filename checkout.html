@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Checkout</title>
-
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="overlay">
+  <h1>Checkout</h1>
 
-<h1>Checkout</h1>
+  <div class="form-box">
+    <input id="user" placeholder="Roblox Username">
+    <input id="pose" placeholder="Pose">
+    <input id="color" placeholder="Preferred Colour">
+    <textarea id="details" placeholder="Extra Details"></textarea>
 
-<div class="form-box">
-
-<input id="user" placeholder="Roblox Username">
-<input id="pose" placeholder="Pose">
-<input id="color" placeholder="Preferred Colour">
-<textarea id="details" placeholder="Extra Details"></textarea>
-
-<button class="btn" onclick="sendOrder()">Send Order</button>
-
-</div>
-
+    <button class="btn" onclick="sendOrder()">Send Order</button>
+  </div>
 </div>
 
 <script>
+function getType() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("type") || "order";
+}
+
 async function sendOrder() {
 
   const webhook = "https://corsproxy.io/?https://discord.com/api/webhooks/1501392563251318784/Az0me-mj2rTm-IgBbsc1Vc-AUdT14KS1pMwpvubE4cwbRFYzP2ByADNJ3gsoOjfvhVsM";
+
+  const type = getType();
 
   const user = document.getElementById("user").value;
   const pose = document.getElementById("pose").value;
   const color = document.getElementById("color").value;
   const details = document.getElementById("details").value;
 
+  let title = "NEW ORDER";
+
+  if (type === "gfx") title = "NEW GFX ORDER";
+  if (type === "banner") title = "NEW BANNER ORDER";
+  if (type === "thumbnail") title = "NEW THUMBNAIL ORDER";
+
   const payload = {
-    content: `🛍️ NEW ORDER:
+    content: `${title}
 -------------------
 Username: ${user}
 Pose: ${pose}
@@ -54,11 +61,11 @@ Details: ${details}`
     if (res.ok) {
       alert("Order sent!");
     } else {
-      alert("Failed to send order.");
+      alert("Failed to send.");
     }
 
   } catch (err) {
-    alert("Error sending order.");
+    alert("Error sending.");
     console.error(err);
   }
 }
