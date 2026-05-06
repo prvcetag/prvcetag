@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,9 @@
 <body>
 <div class="overlay">
   <h1>Checkout</h1>
+
+  <h2 id="orderType"></h2>
+  <h3 id="priceText"></h3>
 
   <div class="form-box">
     <input id="user" placeholder="Roblox Username">
@@ -25,25 +29,38 @@ function getType() {
   return params.get("type") || "order";
 }
 
+const type = getType();
+const orderTypeText = document.getElementById("orderType");
+const priceText = document.getElementById("priceText");
+
+let title = "ORDER";
+
+if (type === "gfx") {
+  title = "GFX ORDER";
+  priceText.innerText = "80 robux / 1 godly";
+}
+if (type === "banner") {
+  title = "BANNER ORDER";
+  priceText.innerText = "160 robux / 2 godlies";
+}
+if (type === "thumbnail") {
+  title = "THUMBNAIL ORDER";
+  priceText.innerText = "240 robux / 3 godlies";
+}
+
+orderTypeText.innerText = title;
+
 async function sendOrder() {
 
   const webhook = "https://corsproxy.io/?https://discord.com/api/webhooks/1501392563251318784/Az0me-mj2rTm-IgBbsc1Vc-AUdT14KS1pMwpvubE4cwbRFYzP2ByADNJ3gsoOjfvhVsM";
-
-  const type = getType();
 
   const user = document.getElementById("user").value;
   const pose = document.getElementById("pose").value;
   const color = document.getElementById("color").value;
   const details = document.getElementById("details").value;
 
-  let title = "NEW ORDER";
-
-  if (type === "gfx") title = "NEW GFX ORDER";
-  if (type === "banner") title = "NEW BANNER ORDER";
-  if (type === "thumbnail") title = "NEW THUMBNAIL ORDER";
-
   const payload = {
-    content: `${title}
+    content: `🛍️ NEW ${title}
 -------------------
 Username: ${user}
 Pose: ${pose}

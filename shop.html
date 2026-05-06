@@ -3,6 +3,47 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .price {
+      font-size: 18px;
+      margin-top: -10px;
+      opacity: 0.9;
+    }
+
+    .chat-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 260px;
+    }
+
+    .chat-header {
+      background: rgba(0,150,255,0.9);
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .chat-content {
+      display: none;
+      background: rgba(0,0,0,0.85);
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+
+    .chat-content input,
+    .chat-content textarea {
+      width: 100%;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+      padding: 8px;
+      font-family: 'DynaPuff', cursive;
+    }
+  </style>
 </head>
 
 <body>
@@ -10,11 +51,70 @@
   <h1>Shop</h1>
 
   <button class="btn" onclick="go('checkout.html?type=gfx')">GFX</button>
-  <button class="btn" onclick="go('checkout.html?type=banner')">Banner</button>
-  <button class="btn" onclick="go('checkout.html?type=thumbnail')">Thumbnail</button>
+  <div class="price">80 robux / 1 godly</div>
 
+  <button class="btn" onclick="go('checkout.html?type=banner')">Banner</button>
+  <div class="price">160 robux / 2 godlies</div>
+
+  <button class="btn" onclick="go('checkout.html?type=thumbnail')">Thumbnail</button>
+  <div class="price">240 robux / 3 godlies</div>
+</div>
+
+<!-- LIVE CHAT -->
+<div class="chat-box">
+  <div class="chat-header" onclick="toggleChat()">LIVE CHAT</div>
+
+  <div class="chat-content" id="chatContent">
+    <input id="contact" placeholder="Discord or Email (required)">
+    <textarea id="chatMsg" placeholder="Type your message..."></textarea>
+    <button class="btn" onclick="sendChat()">Send</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
+
+<script>
+function toggleChat() {
+  const box = document.getElementById("chatContent");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+async function sendChat() {
+  const webhook = "https://corsproxy.io/?https://discord.com/api/webhooks/1501392563251318784/Az0me-mj2rTm-IgBbsc1Vc-AUdT14KS1pMwpvubE4cwbRFYzP2ByADNJ3gsoOjfvhVsM";
+
+  const contact = document.getElementById("contact").value;
+  const msg = document.getElementById("chatMsg").value;
+
+  if (!contact || !msg) {
+    alert("Please enter your Discord/email and message.");
+    return;
+  }
+
+  const payload = {
+    content: `💬 LIVE CHAT MESSAGE
+Contact: ${contact}
+Message: ${msg}`
+  };
+
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      alert("Message sent!");
+    } else {
+      alert("Failed to send.");
+    }
+
+  } catch (err) {
+    alert("Error sending.");
+    console.error(err);
+  }
+}
+</script>
+
 </body>
 </html>
