@@ -1,25 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Gallery</title>
+
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .gallery-section {
+      margin-top: 40px;
+    }
+
+    .gallery-title {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .grid img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 3px solid rgba(0, 200, 255, 0.6);
+      transition: 0.3s;
+    }
+
+    .grid img:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 
 <body>
+
 <div class="overlay">
-  <h1>Gallery</h1>
 
-  <h2>GFXs:</h2>
-  <img src="img1.png" width="150">
-  <img src="img2.png" width="150">
-  <img src="img3.png" width="150">
-  <img src="img4.png" width="150">
-  <img src="img5.png" width="150">
-  <img src="img6.png" width="150">
+<h1>Gallery</h1>
 
-  <h2>Banners:</h2>
+<!-- GFX SECTION -->
+<div class="gallery-section">
+  <div class="gallery-title">GFXs</div>
+  <div class="grid">
 
-  <h2>Thumbnails:</h2>
+    <img src="PASTE_GFX_1">
+    <img src="PASTE_GFX_2">
+    <img src="PASTE_GFX_3">
+    <img src="PASTE_GFX_4">
+    <img src="PASTE_GFX_5">
+    <img src="PASTE_GFX_6">
+
+  </div>
 </div>
+
+<!-- BANNERS SECTION -->
+<div class="gallery-section">
+  <div class="gallery-title">Banners</div>
+  <div class="grid">
+
+    <img src="PASTE_BANNER_1">
+    <img src="PASTE_BANNER_2">
+    <img src="PASTE_BANNER_3">
+    <img src="PASTE_BANNER_4">
+    <img src="PASTE_BANNER_5">
+    <img src="PASTE_BANNER_6">
+
+  </div>
+</div>
+
+<!-- THUMBNAILS SECTION -->
+<div class="gallery-section">
+  <div class="gallery-title">Thumbnails</div>
+  <div class="grid">
+
+    <img src="PASTE_THUMB_1">
+    <img src="PASTE_THUMB_2">
+    <img src="PASTE_THUMB_3">
+    <img src="PASTE_THUMB_4">
+    <img src="PASTE_THUMB_5">
+    <img src="PASTE_THUMB_6">
+
+  </div>
+</div>
+
+</div>
+
 </body>
 </html>
